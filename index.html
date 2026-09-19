@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap/bootstrap.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Navbar section -->
+
+    <nav class="navbar bg-body-tertiary">
+      <div class="container-fluid px-4">
+        <a class="navbar-brand"><img src="./images/img.webp" alt="" /></a>
+        <form class="d-flex" role="search">
+          <button class="btn btn-outline-success" type="submit">
+            Explore Recipes
+          </button>
+          <button class="btn btn-outline-success" type="submit">
+            Share Your Recipe
+          </button>
+          <button class="btn btn-outline-success" type="submit">
+            My Recipes
+          </button>
+        </form>
+      </div>
+    </nav>
+    <!-- Navbar end -->
+
+    <!-- hero section  -->
+
+    <div class="container col-xxl-8 px-4 py-5">
+      <div class="row align-items-center g-5 py-5">
+        <div class="col-10 col-sm-8 col-lg-6">
+          <img
+            src="./images/Chicken malai recipe.jpg"
+            class="d-block mx-lg-auto img-fluid"
+            alt="Blog Image"
+            width="300"
+            height="200"
+            loading="lazy"
+          />
+        </div>
+        <div class="col-lg-6">
+          <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">
+            Delicious Recipes, Shared With Love
+          </h1>
+          <p class="lead">
+            Discover amazing recipes, share your favorite dishes, and find
+            inspiration for your next meal.
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- hero section end -->
+
+
+
+    <!-- card section start -->
+
+
+    
+    <div class="container py-5">
+        <div class="card-group gap-4">
+      
+          <div class="card">
+            <img src="./pic2.jpg" class="card-img-top"
+                 style="height: 220px; object-fit: cover;">
+            <div class="card-body">
+              <h5 class="card-title">Chinese</h5>
+              <p class="card-text">
+                Discover and share tasty Chinese dishes like Fried Rice, Chow Mein,
+              </p>
+              <p><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+            </div>
+          </div>
+      
+          <div class="card">
+            <img src="./pic3.jpg" class="card-img-top"
+                 style="height: 220px; object-fit: cover;">
+            <div class="card-body">
+              <h5 class="card-title">Pakistani</h5>
+              <p class="card-text">
+                Explore rich and flavorful Pakistani recipes, from traditional curries to delicious biryani and kebabs.
+              </p>
+              <p><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+            </div>
+          </div>
+      
+          <div class="card">
+            <img src="./pic4.jpg" class="card-img-top"
+                 style="height: 220px; object-fit: cover;">
+            <div class="card-body">
+              <h5 class="card-title">Italian</h5>
+              <p class="card-text">
+                Explore and share classic Italian favorites like Pasta, Pizza, and Lasagna.
+              </p>
+              <p><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+            </div>
+          </div>
+
+    
+      
+        </div>
+      </div>
+      <!-- hero section end -->
+      
+      
+
+
+    <!-- supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="bootstrap/bootstrap.js" />
+    <script src="app.js"></script>
+  </body>
+</html>
