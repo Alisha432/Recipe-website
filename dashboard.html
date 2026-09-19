@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="bootstrap/bootstrap.css">
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg bg-light">
+
+        <div class="container">
+
+            <a class="navbar-brand" href="dashboard.html">
+                RecipeShare
+            </a>
+
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navMenu">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+
+            <div
+                class="collapse navbar-collapse"
+                id="navMenu">
+
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="dashboard.html">
+
+                            Dashboard
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="all-recipes.html">
+
+                            All Recipes
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="./saved-recipes.html">
+
+                            My Recipes
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="recipe.html">
+
+                            Add Recipe
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <button
+                            class="btn btn-outline-dark"
+                            id="logout">
+
+                            Logout
+
+                        </button>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <div class="container py-5">
+
+
+        <div class="mb-4">
+
+            <h1>Welcome Back!</h1>
+
+            <p class="text-muted">
+                Create and share your favorite recipes.
+            </p>
+
+            <a
+                href="recipe.html"
+                class="btn btn-dark">
+
+                Add Recipe
+
+            </a>
+
+        </div>
+
+
+        <div class="row g-3 mb-5">
+
+
+            <div class="col-12 col-md-6">
+
+                <div class="card">
+
+                    <div class="card-body">
+
+                        <h5>Total Recipes</h5>
+
+                        <h2 id="total">0</h2>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-12 col-md-6">
+
+                <div class="card">
+
+                    <div class="card-body">
+
+                        <h5>My Recipes</h5>
+
+                        <h2 id="mine">0</h2>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div>
+
+            <h2 class="mb-3">
+                Recent Recipes
+            </h2>
+
+
+            <div
+                class="row g-3"
+                id="recipes">
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="bootstrap/bootstrap.js"></script>
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>

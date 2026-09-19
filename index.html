@@ -13,14 +13,14 @@
     <nav class="navbar bg-body-tertiary">
       <div class="container-fluid px-4">
         <a class="navbar-brand"><img src="./images/img.webp" alt="" /></a>
-        <form class="d-flex" role="search">
-          <button class="btn btn-outline-success" type="submit">
-            Explore Recipes
+        <form class="d-flex gap-3" role="search">
+          <button class="btn btn-outline-success" type="button" id="dish">
+All Recipes
           </button>
-          <button class="btn btn-outline-success" type="submit">
-            My Recipes
+          <button class="btn btn-outline-success" type="button" id="goLogin">
+            Login
           </button>
-          <button class="btn btn-outline-success" type="submit" id="signupBtn">
+          <button class="btn btn-outline-success" type="button" id="signupBtn">
             signup
           </button>
         </form>
@@ -66,50 +66,91 @@
     <div class="container py-5">
         <div class="card-group gap-4">
       
+        
+<div class="card">
+            <img src="./images/Health.jpg" class="card-img-top"
+                 style="height: 220px; object-fit: cover;">
+            <div class="card-body">
+              <h5 class="card-title">Health</h5>
+              <p class="card-text">
+              Fresh vegetables with grilled chicken and a light dressing.
+              </p>
+
+            </div>
+          </div>
           <div class="card">
-            <img src="./pic2.jpg" class="card-img-top"
+            <img src="./images/Fast food.jpg" class="card-img-top"
+                 style="height: 220px; object-fit: cover;">
+            <div class="card-body">
+              <h5 class="card-title">Fast food</h5>
+              <p class="card-text">
+              Crunchy chicken fillet with lettuce, cheese and creamy sauce.
+              </p>
+             
+            </div>
+          </div>
+            <div class="card">
+            <img src="./images/Dessert.jpg" class="card-img-top"
+                 style="height: 220px; object-fit: cover;">
+            <div class="card-body">
+              <h5 class="card-title">Dessert</h5>
+              <p class="card-text">
+                Warm chocolate cake with a soft, melted chocolate center.
+              </p>
+            
+            </div>
+          </div>
+    
+      
+        </div>
+      </div>
+      
+      
+
+
+       <div class="container py-5">
+        <div class="card-group gap-4">
+
+  <div class="card">
+            <img src="./images/chinees.jpg" class="card-img-top"
                  style="height: 220px; object-fit: cover;">
             <div class="card-body">
               <h5 class="card-title">Chinese</h5>
               <p class="card-text">
                 Discover and share tasty Chinese dishes like Fried Rice, Chow Mein,
               </p>
-              <p><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+             
             </div>
           </div>
       
           <div class="card">
-            <img src="./pic3.jpg" class="card-img-top"
+            <img src="./images/Biryani.jpg" class="card-img-top"
                  style="height: 220px; object-fit: cover;">
             <div class="card-body">
               <h5 class="card-title">Pakistani</h5>
               <p class="card-text">
                 Explore rich and flavorful Pakistani recipes, from traditional curries to delicious biryani and kebabs.
               </p>
-              <p><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+             
             </div>
           </div>
       
           <div class="card">
-            <img src="./pic4.jpg" class="card-img-top"
+            <img src="./images/italiain.jpg" class="card-img-top"
                  style="height: 220px; object-fit: cover;">
             <div class="card-body">
               <h5 class="card-title">Italian</h5>
               <p class="card-text">
                 Explore and share classic Italian favorites like Pasta, Pizza, and Lasagna.
               </p>
-              <p><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+             
             </div>
           </div>
 
-    
-      
         </div>
-      </div>
-      <!-- hero section end -->
-      
-      
+        </div>
 
+      
 
     <!-- supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

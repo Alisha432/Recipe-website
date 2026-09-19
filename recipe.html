@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Create Recipe</title>
+
+    <link
+        rel="stylesheet"
+        href="bootstrap/bootstrap.css">
+
+    <link
+        rel="stylesheet"
+        href="style.css">
+
+</head>
+
+<body>
+
+
+    <nav class="navbar navbar-expand-lg bg-light">
+
+        <div class="container">
+
+            <a
+                class="navbar-brand"
+                href="dashboard.html">
+
+                RecipeShare
+
+            </a>
+
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#recipeMenu">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+
+            <div
+                class="collapse navbar-collapse"
+                id="recipeMenu">
+
+                <ul class="navbar-nav ms-auto">
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="dashboard.html">
+
+                            Dashboard
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="all-recipes.html">
+
+                            All Recipes
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="saved-recipes.html">
+
+                            My Recipes
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link active"
+                            href="recipe.html">
+
+                            Add Recipe
+
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <button
+                            class="btn btn-outline-dark"
+                            id="logout">
+
+                            Logout
+
+                        </button>
+
+                    </li>
+
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+
+    <div class="container py-5">
+
+        <div class="row justify-content-center">
+
+            <div class="col-12 col-md-8">
+
+
+                <h1 class="mb-4">
+                    Create Recipe
+                </h1>
+
+
+                <form id="recipe">
+
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Recipe Title
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="recipeTitle"
+                            placeholder="Enter recipe title">
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Description
+                        </label>
+
+                        <textarea
+                            class="form-control"
+                            id="recipeDescription"
+                            rows="3"
+                            placeholder="Enter recipe description"></textarea>
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Category
+                        </label>
+
+                        <select
+                            class="form-select"
+                            id="recipeCategory">
+
+                            <option value="">
+                                Select Category
+                            </option>
+
+                            <option value="Breakfast">
+                                Breakfast
+                            </option>
+
+                            <option value="Lunch">
+                                Lunch
+                            </option>
+
+                            <option value="Dinner">
+                                Dinner
+                            </option>
+
+                            <option value="Dessert">
+                                Dessert
+                            </option>
+
+                            <option value="Drinks">
+                                Drinks
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Ingredients
+                        </label>
+
+                        <textarea
+                            class="form-control"
+                            id="recipeIngredients"
+                            rows="5"
+                            placeholder="Enter ingredients"></textarea>
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Instructions
+                        </label>
+
+                        <textarea
+                            class="form-control"
+                            id="recipeInstructions"
+                            rows="5"
+                            placeholder="Enter cooking instructions"></textarea>
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Cooking Time
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="recipeTime"
+                            placeholder="Example: 30 minutes">
+
+                    </div>
+
+
+                    <div class="mb-4">
+
+                        <label class="form-label">
+                            Recipe Image
+                        </label>
+
+                        <input
+                            type="file"
+                            class="form-control"
+                            id="recipePic"
+                            accept="image/*">
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="btn btn-dark"
+                        id="saveRecipe">
+
+                        Create Recipe
+
+                    </button>
+
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="bootstrap/bootstrap.js"></script>
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>
