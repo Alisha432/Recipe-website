@@ -1,4 +1,5 @@
 const supabaseUrl = "https://edaxqmayxajztfcsouqg.supabase.co";
+
 const supabaseKey = "sb_publishable_86yyo8GVbSp02Yjxs4CfVQ_HvzKINpH";
 
 const { createClient } = supabase;
@@ -11,113 +12,129 @@ console.log(client);
 // signup
 
 let signupForm = document.querySelector("#formData");
+
 let signup = document.querySelector("#signupBtn");
 
-signup && signup.addEventListener("click", (event) => {
 
-    event.preventDefault();
+if (signup && !signupForm) {
 
-    window.location.href = "./signup.html";
+    signup.addEventListener("click", (event) => {
 
-});
+        event.preventDefault();
 
+        window.location.href = "./signup.html";
 
-signupForm && signupForm.addEventListener("submit", async (event) => {
+    });
 
-    event.preventDefault();
-
-    try {
-
-        const data = new FormData(signupForm);
-
-        let emptyField = false;
-
-        let inputs = document.querySelectorAll("input");
-
-        inputs.forEach((input) => {
-
-            if (input.value === "") {
-
-                input.style.border = "2px solid red";
-
-                emptyField = true;
-
-            }
-
-        });
+}
 
 
-        if (emptyField) {
-            return;
-        }
+if (signupForm) {
+
+    signupForm.addEventListener("submit", async (event) => {
+
+        event.preventDefault();
+
+        try {
+
+            const data = new FormData(signupForm);
+
+            let emptyField = false;
+
+            let inputs = document.querySelectorAll("input");
 
 
-        const allData = Object.fromEntries(data);
+            inputs.forEach((input) => {
 
-        const { email, password, name } = allData;
+                if (input.value === "") {
 
+                    input.style.border = "2px solid red";
 
-        const { data: signupdata, error } =
-            await client.auth.signUp({
-                email,
-                password
+                    emptyField = true;
+
+                }
+
             });
 
 
-        console.log(signupdata);
-        console.log(error);
+            if (emptyField) {
+
+                alert("Please fill all fields");
+
+                return;
+
+            }
 
 
-        if (error) {
+            const allData = Object.fromEntries(data);
 
-            console.log(error.message);
-
-            return;
-
-        }
+            const { email, password, name } = allData;
 
 
-        let id = signupdata.user.id;
-
-        console.log(id);
-
-
-        const { error: signuperror } =
-            await client
-                .from("recipe_data")
-                .insert({
-                    name: name,
-                    user_id: id
+            const { data: signupdata, error } =
+                await client.auth.signUp({
+                    email: email,
+                    password: password
                 });
 
 
-        console.log(signuperror);
+            console.log(signupdata);
+            console.log(error);
 
 
-        if (signuperror) {
+            if (error) {
 
-            console.log(signuperror.message);
+                alert(error.message);
 
-            return;
+                return;
+
+            }
+
+
+            let id = signupdata.user.id;
+
+
+            const { error: signuperror } =
+                await client
+                    .from("recipe_data")
+                    .insert({
+                        name: name,
+                        user_id: id
+                    });
+
+
+            console.log(signuperror);
+
+
+            if (signuperror) {
+
+                alert(signuperror.message);
+
+                return;
+
+            }
+
+
+            alert("Signup successful!");
+
+            window.location.href = "./login.html";
+
+        }
+        catch (error) {
+
+            console.log(error);
 
         }
 
+    });
 
-        console.log("Signup successful");
-
-    }
-    catch (error) {
-
-        console.log(error);
-
-    }
-
-});
+}
 
 
 // input border
 
 let inputs = document.querySelectorAll("input");
+
 
 inputs.forEach((input) => {
 
@@ -137,6 +154,7 @@ inputs.forEach((input) => {
 // index page login button
 
 let goLogin = document.querySelector("#goLogin");
+
 
 goLogin && goLogin.addEventListener("click", (event) => {
 
@@ -158,72 +176,131 @@ let password = document.querySelector("#password");
 let loginSignupBtn = document.querySelector("#signupBtn");
 
 
-loginSignupBtn && loginSignupBtn.addEventListener("click", (event) => {
+if (loginSignupBtn && loginForm) {
 
-    event.preventDefault();
+    loginSignupBtn.addEventListener("click", (event) => {
 
-    window.location.href = "./signup.html";
+        event.preventDefault();
 
-});
+        window.location.href = "./signup.html";
 
+    });
 
-loginForm && loginForm.addEventListener("submit", async (event) => {
-
-    event.preventDefault();
-
-    try {
-
-        const { data: signindata, error: signinerror } =
-            await client.auth.signInWithPassword({
-                email: email.value,
-                password: password.value
-            });
+}
 
 
-        console.log("Login Data:", signindata);
+if (loginForm) {
 
-        console.log("Login Error:", signinerror);
+    loginForm.addEventListener("submit", async (event) => {
+
+        event.preventDefault();
+
+        try {
+
+            const { data: signindata, error: signinerror } =
+                await client.auth.signInWithPassword({
+                    email: email.value,
+                    password: password.value
+                });
 
 
-        if (signinerror) {
+            console.log("Login Data:", signindata);
 
-            Swal.fire({
-                icon: "error",
-                title: "Login Failed",
-                text: signinerror.message
-            });
+            console.log("Login Error:", signinerror);
+
+
+            if (signinerror) {
+
+                if (typeof Swal !== "undefined") {
+
+                    Swal.fire({
+                        icon: "error",
+                        title: "Login Failed",
+                        text: signinerror.message
+                    });
+
+                }
+                else {
+
+                    alert(signinerror.message);
+
+                }
+
+                return;
+
+            }
+
+
+            if (typeof Swal !== "undefined") {
+
+                Swal.fire({
+                    icon: "success",
+                    title: "Login Successful",
+                    text: "Welcome back!"
+                }).then(() => {
+
+                    window.location.href = "./dashboard.html";
+
+                });
+
+            }
+            else {
+
+                window.location.href = "./dashboard.html";
+
+            }
+
+        }
+        catch (error) {
+
+            console.log(error);
+
+        }
+
+    });
+
+}
+
+
+// dashboard protection
+
+if (
+    document.querySelector("#total") ||
+    document.querySelector("#mine") ||
+    document.querySelector("#recipes")
+) {
+
+    const checkUser = async () => {
+
+        const { data, error } =
+            await client.auth.getSession();
+
+
+        console.log("Dashboard Session:", data);
+
+        console.log("Dashboard Error:", error);
+
+
+        if (error || !data.session) {
+
+            window.location.href = "./login.html";
 
             return;
 
         }
 
+    };
 
-        console.log("Session:", signindata.session);
 
+    checkUser();
 
-        Swal.fire({
-            icon: "success",
-            title: "Login Successful",
-            text: "Welcome back!"
-        }).then(() => {
-
-            window.location.href = "./dashboard.html";
-
-        });
-
-    }
-    catch (error) {
-
-        console.log(error);
-
-    }
-
-});
+}
 
 
 // dashboard total recipes
 
 let totalBox = document.querySelector("#total");
+
 
 if (totalBox) {
 
@@ -253,6 +330,7 @@ if (totalBox) {
 
     };
 
+
     getTotal();
 
 }
@@ -261,6 +339,7 @@ if (totalBox) {
 // dashboard my recipes count
 
 let mineBox = document.querySelector("#mine");
+
 
 if (mineBox) {
 
@@ -277,18 +356,7 @@ if (mineBox) {
             console.log("Session Error:", error);
 
 
-            if (error) {
-
-                console.log(error);
-
-                return;
-
-            }
-
-
-            if (!data.session) {
-
-                console.log("User is not logged in");
+            if (error || !data.session) {
 
                 return;
 
@@ -296,9 +364,6 @@ if (mineBox) {
 
 
             let userId = data.session.user.id;
-
-
-            console.log("User ID:", userId);
 
 
             const { data: recipes, error: recipeError } =
@@ -333,6 +398,7 @@ if (mineBox) {
 
     };
 
+
     getMine();
 
 }
@@ -342,6 +408,7 @@ if (mineBox) {
 
 let recipesBox = document.querySelector("#recipes");
 
+
 if (recipesBox) {
 
     const getRecipes = async () => {
@@ -349,7 +416,13 @@ if (recipesBox) {
         const { data, error } =
             await client
                 .from("recipes")
-                .select("id, title, description, category, cooking_time");
+                .select(
+                    "id, title, description, category, cooking_time"
+                )
+                .order("created_at", {
+                    ascending: false
+                })
+                .limit(6);
 
 
         console.log("Recent Recipes:", data);
@@ -364,6 +437,9 @@ if (recipesBox) {
             return;
 
         }
+
+
+        recipesBox.innerHTML = "";
 
 
         data.forEach((recipe) => {
@@ -385,7 +461,8 @@ if (recipesBox) {
                             </p>
 
                             <p>
-                                Cooking Time: ${recipe.cooking_time}
+                                Cooking Time:
+                                ${recipe.cooking_time}
                             </p>
 
                         </div>
@@ -400,6 +477,7 @@ if (recipesBox) {
 
     };
 
+
     getRecipes();
 
 }
@@ -409,15 +487,29 @@ if (recipesBox) {
 
 let recipeForm = document.querySelector("#recipe");
 
+
 if (recipeForm) {
 
-    let titleBox = document.querySelector("#recipeTitle");
-    let descriptionBox = document.querySelector("#recipeDescription");
-    let categoryBox = document.querySelector("#recipeCategory");
-    let ingredientsBox = document.querySelector("#recipeIngredients");
-    let instructionsBox = document.querySelector("#recipeInstructions");
-    let timeBox = document.querySelector("#recipeTime");
-    let pictureBox = document.querySelector("#recipePic");
+    let titleBox =
+        document.querySelector("#recipeTitle");
+
+    let descriptionBox =
+        document.querySelector("#recipeDescription");
+
+    let categoryBox =
+        document.querySelector("#recipeCategory");
+
+    let ingredientsBox =
+        document.querySelector("#recipeIngredients");
+
+    let instructionsBox =
+        document.querySelector("#recipeInstructions");
+
+    let timeBox =
+        document.querySelector("#recipeTime");
+
+    let pictureBox =
+        document.querySelector("#recipePic");
 
 
     recipeForm.addEventListener("submit", async (event) => {
@@ -430,16 +522,7 @@ if (recipeForm) {
                 await client.auth.getSession();
 
 
-            if (error) {
-
-                console.log(error);
-
-                return;
-
-            }
-
-
-            if (!data.session) {
+            if (error || !data.session) {
 
                 alert("Please Login First");
 
@@ -459,19 +542,24 @@ if (recipeForm) {
 
                 let image = pictureBox.files[0];
 
+                let imageName =
+                    Date.now() + "-" + image.name;
+
 
                 const { data: upload, error: uploadError } =
                     await client.storage
                         .from("recipe_images")
-                        .upload(image.name, image);
+                        .upload(imageName, image);
 
 
                 console.log(upload);
 
+                console.log(uploadError);
+
 
                 if (uploadError) {
 
-                    console.log(uploadError);
+                    alert(uploadError.message);
 
                     return;
 
@@ -481,7 +569,7 @@ if (recipeForm) {
                 const { data: url } =
                     client.storage
                         .from("recipe_images")
-                        .getPublicUrl(image.name);
+                        .getPublicUrl(imageName);
 
 
                 imageUrl = url.publicUrl;
@@ -508,6 +596,8 @@ if (recipeForm) {
 
                 console.log(saveError);
 
+                alert(saveError.message);
+
                 return;
 
             }
@@ -531,7 +621,9 @@ if (recipeForm) {
 
 // my recipes page
 
-let savedList = document.querySelector("#savedRecipeList");
+let savedList =
+    document.querySelector("#savedRecipeList");
+
 
 if (savedList) {
 
@@ -548,18 +640,7 @@ if (savedList) {
             console.log("Session Error:", error);
 
 
-            if (error) {
-
-                console.log(error);
-
-                return;
-
-            }
-
-
-            if (!data.session) {
-
-                console.log("User is not logged in");
+            if (error || !data.session) {
 
                 alert("Please Login First");
 
@@ -573,13 +654,12 @@ if (savedList) {
             let userId = data.session.user.id;
 
 
-            console.log("User ID:", userId);
-
-
             const { data: recipes, error: recipeError } =
                 await client
                     .from("recipes")
-                    .select("id, title, description, category, ingredients, instructions, cooking_time, image_url")
+                    .select(
+                        "id, title, description, category, ingredients, instructions, cooking_time, image_url"
+                    )
                     .eq("user_id", userId);
 
 
@@ -597,13 +677,23 @@ if (savedList) {
             }
 
 
+            savedList.innerHTML = "";
+
+
             if (recipes.length === 0) {
 
                 savedList.innerHTML = `
+
                     <div class="col-12">
+
                         <h4>No Recipes Found</h4>
-                        <p>You have not added any recipes yet.</p>
+
+                        <p>
+                            You have not added any recipes yet.
+                        </p>
+
                     </div>
+
                 `;
 
                 return;
@@ -628,14 +718,18 @@ if (savedList) {
 
                                 <h5>${recipe.title}</h5>
 
-                                <p>${recipe.description}</p>
-
                                 <p>
-                                    Category: ${recipe.category}
+                                    ${recipe.description}
                                 </p>
 
                                 <p>
-                                    Cooking Time: ${recipe.cooking_time}
+                                    Category:
+                                    ${recipe.category}
+                                </p>
+
+                                <p>
+                                    Cooking Time:
+                                    ${recipe.cooking_time}
                                 </p>
 
                                 <button
@@ -662,8 +756,6 @@ if (savedList) {
             });
 
 
-            // delete
-
             let deleteBtns =
                 document.querySelectorAll(".removeRecipe");
 
@@ -687,17 +779,19 @@ if (savedList) {
                                 imageUrl.split("/recipe_images/")[1];
 
 
-                            const { error: imageError } =
-                                await client.storage
-                                    .from("recipe_images")
-                                    .remove([imagePath]);
+                            if (imagePath) {
+
+                                const { error: imageError } =
+                                    await client.storage
+                                        .from("recipe_images")
+                                        .remove([imagePath]);
 
 
-                            if (imageError) {
+                                if (imageError) {
 
-                                console.log(imageError);
+                                    console.log(imageError);
 
-                                return;
+                                }
 
                             }
 
@@ -714,6 +808,8 @@ if (savedList) {
                         if (error) {
 
                             console.log(error);
+
+                            alert(error.message);
 
                             return;
 
@@ -735,8 +831,6 @@ if (savedList) {
 
             });
 
-
-            // edit
 
             let editBtns =
                 document.querySelectorAll(".updateRecipe");
@@ -794,41 +888,34 @@ if (savedList) {
                     }
 
 
-                    try {
-
-                        const { error } =
-                            await client
-                                .from("recipes")
-                                .update({
-                                    title: title,
-                                    description: description,
-                                    category: category,
-                                    ingredients: ingredients,
-                                    instructions: instructions,
-                                    cooking_time: cookingTime
-                                })
-                                .eq("id", recipeId);
+                    const { error } =
+                        await client
+                            .from("recipes")
+                            .update({
+                                title: title,
+                                description: description,
+                                category: category,
+                                ingredients: ingredients,
+                                instructions: instructions,
+                                cooking_time: cookingTime
+                            })
+                            .eq("id", recipeId);
 
 
-                        if (error) {
-
-                            console.log(error);
-
-                            return;
-
-                        }
-
-
-                        alert("Recipe Updated Successfully");
-
-                        location.reload();
-
-                    }
-                    catch (error) {
+                    if (error) {
 
                         console.log(error);
 
+                        alert(error.message);
+
+                        return;
+
                     }
+
+
+                    alert("Recipe Updated Successfully");
+
+                    location.reload();
 
                 });
 
@@ -851,7 +938,9 @@ if (savedList) {
 
 // logout
 
-let logout = document.querySelector("#logout");
+let logout =
+    document.querySelector("#logout");
+
 
 if (logout) {
 
@@ -879,7 +968,9 @@ if (logout) {
 
 // all recipes button
 
-let dishBtn = document.querySelector("#dish");
+let dishBtn =
+    document.querySelector("#dish");
+
 
 dishBtn && dishBtn.addEventListener("click", (event) => {
 
@@ -904,36 +995,37 @@ if (document.querySelector("#recipesList")) {
         document.querySelector("#recipesList");
 
 
-    const loadCategories = async () => {
+    recipeCategory.innerHTML = `
 
-        const { data, error } =
-            await client
-                .from("recipe_categories")
-                .select("id, name");
+        <option value="">
+            All Categories
+        </option>
 
+        <option value="Pakistani">
+            Pakistani
+        </option>
 
-        if (error) {
+        <option value="Italian">
+            Italian
+        </option>
 
-            console.log(error);
+        <option value="Chinese">
+            Chinese
+        </option>
 
-            return;
+        <option value="Desserts">
+            Desserts
+        </option>
 
-        }
+        <option value="Fast Food">
+            Fast Food
+        </option>
 
+        <option value="Healthy">
+            Healthy
+        </option>
 
-        data.forEach((category) => {
-
-            recipeCategory.innerHTML += `
-
-                <option value="${category.name}">
-                    ${category.name}
-                </option>
-
-            `;
-
-        });
-
-    };
+    `;
 
 
     const loadRecipes = async () => {
@@ -943,7 +1035,14 @@ if (document.querySelector("#recipesList")) {
             const { data, error } =
                 await client
                     .from("recipes")
-                    .select("id, title, description, category, ingredients, cooking_time, image_url");
+                    .select(
+                        "id, title, description, category, ingredients, cooking_time, image_url"
+                    );
+
+
+            console.log("All Recipes:", data);
+
+            console.log("All Recipes Error:", error);
 
 
             if (error) {
@@ -958,88 +1057,14 @@ if (document.querySelector("#recipesList")) {
             recipesList.innerHTML = "";
 
 
-            data.forEach(async (recipe) => {
-
-                let ingredientsText =
-                    recipe.ingredients;
-
-
-                const { data: links, error: linkError } =
-                    await client
-                        .from("recipe_ingredient_links")
-                        .select("ingredient_id")
-                        .eq("recipe_id", recipe.id);
-
-
-                if (linkError) {
-
-                    console.log(linkError);
-
-                }
-
-
-                if (links && links.length > 0) {
-
-                    ingredientsText = "";
-
-
-                    links.forEach(async (link) => {
-
-                        const { data: ingredient, error: ingredientError } =
-                            await client
-                                .from("recipe_ingredients_data")
-                                .select("name")
-                                .eq("id", link.ingredient_id);
-
-
-                        if (ingredientError) {
-
-                            console.log(ingredientError);
-
-                            return;
-
-                        }
-
-
-                        if (ingredient.length > 0) {
-
-                            ingredientsText +=
-                                ingredient[0].name + ", ";
-
-                        }
-
-                    });
-
-                }
-
-
-                const { data: favorites, error: favoriteError } =
-                    await client
-                        .from("favorite_recipes")
-                        .select("id")
-                        .eq("recipe_id", recipe.id);
-
-
-                if (favoriteError) {
-
-                    console.log(favoriteError);
-
-                }
-
-
-                let favoriteText = "Favorite";
-
-
-                if (favorites && favorites.length > 0) {
-
-                    favoriteText = "Favorited";
-
-                }
-
+            data.forEach((recipe) => {
 
                 recipesList.innerHTML += `
 
-                    <div class="col-12 col-md-6 col-lg-4 recipeCard">
+                    <div
+                        class="col-12 col-md-6 col-lg-4 recipeCard"
+                        data-category="${recipe.category}"
+                    >
 
                         <div class="card h-100">
 
@@ -1052,30 +1077,29 @@ if (document.querySelector("#recipesList")) {
 
                                 <h5>${recipe.title}</h5>
 
-                                <p>${recipe.description}</p>
-
                                 <p>
-                                    Category: ${recipe.category}
+                                    ${recipe.description}
                                 </p>
 
                                 <p>
-                                    Cooking Time: ${recipe.cooking_time}
+                                    Category:
+                                    ${recipe.category}
                                 </p>
 
                                 <p>
-                                    Ingredients: ${ingredientsText}
+                                    Cooking Time:
+                                    ${recipe.cooking_time}
+                                </p>
+
+                                <p>
+                                    Ingredients:
+                                    ${recipe.ingredients}
                                 </p>
 
                                 <button
                                     class="btn btn-dark detailsBtn"
                                     data-id="${recipe.id}">
                                     View Details
-                                </button>
-
-                                <button
-                                    class="btn btn-outline-dark favoriteBtn"
-                                    data-id="${recipe.id}">
-                                    ${favoriteText}
                                 </button>
 
                             </div>
@@ -1088,6 +1112,26 @@ if (document.querySelector("#recipesList")) {
 
             });
 
+
+            let detailsBtns =
+                document.querySelectorAll(".detailsBtn");
+
+
+            detailsBtns.forEach((button) => {
+
+                button.addEventListener("click", () => {
+
+                    let id =
+                        button.getAttribute("data-id");
+
+
+                    window.location.href =
+                        "./recipe-details.html?id=" + id;
+
+                });
+
+            });
+
         }
         catch (error) {
 
@@ -1097,8 +1141,6 @@ if (document.querySelector("#recipesList")) {
 
     };
 
-
-    loadCategories();
 
     loadRecipes();
 
@@ -1116,7 +1158,9 @@ if (document.querySelector("#recipesList")) {
         cards.forEach((card) => {
 
             let title =
-                card.querySelector("h5").innerText.toLowerCase();
+                card.querySelector("h5")
+                    .innerText
+                    .toLowerCase();
 
 
             if (title.includes(searchValue)) {
@@ -1148,12 +1192,12 @@ if (document.querySelector("#recipesList")) {
         cards.forEach((card) => {
 
             let category =
-                card.querySelector(".card-body p").innerText;
+                card.getAttribute("data-category");
 
 
             if (
-                selectedCategory == "" ||
-                category.includes(selectedCategory)
+                selectedCategory === "" ||
+                category === selectedCategory
             ) {
 
                 card.style.display = "block";
@@ -1168,5 +1212,142 @@ if (document.querySelector("#recipesList")) {
         });
 
     });
+
+}
+
+
+// recipe details
+
+if (document.querySelector("#recipeDetails")) {
+
+    const loadRecipeDetails = async () => {
+
+        let url =
+            new URLSearchParams(window.location.search);
+
+
+        let id =
+            url.get("id");
+
+
+        if (!id) {
+
+            return;
+
+        }
+
+
+        const { data, error } =
+            await client
+                .from("recipes")
+                .select("*")
+                .eq("id", id)
+                .single();
+
+
+        console.log("Recipe Details:", data);
+
+        console.log("Recipe Details Error:", error);
+
+
+        if (error) {
+
+            console.log(error);
+
+            return;
+
+        }
+
+
+        let authorName = "Recipe User";
+
+
+        const { data: authorData } =
+            await client
+                .from("recipe_data")
+                .select("name")
+                .eq("user_id", data.user_id)
+                .single();
+
+
+        if (authorData) {
+
+            authorName = authorData.name;
+
+        }
+
+
+        let container =
+            document.querySelector("#recipeDetails");
+
+
+        container.innerHTML = `
+
+            <div class="card">
+
+                <img
+                    src="${data.image_url}"
+                    class="card-img-top"
+                    style="max-height:450px; object-fit:cover;"
+                >
+
+                <div class="card-body p-4">
+
+                    <h1>
+                        ${data.title}
+                    </h1>
+
+                    <p>
+                        ${data.description}
+                    </p>
+
+                    <p>
+                        <strong>Category:</strong>
+                        ${data.category}
+                    </p>
+
+                    <p>
+                        <strong>Cooking Time:</strong>
+                        ${data.cooking_time}
+                    </p>
+
+                    <p>
+                        <strong>Author:</strong>
+                        ${authorName}
+                    </p>
+
+                    <p>
+                        <strong>Date:</strong>
+                        ${new Date(
+                            data.created_at
+                        ).toLocaleDateString()}
+                    </p>
+
+                    <h4>
+                        Ingredients
+                    </h4>
+
+                    <p>
+                        ${data.ingredients}
+                    </p>
+
+                    <h4>
+                        Instructions
+                    </h4>
+
+                    <p>
+                        ${data.instructions}
+                    </p>
+
+                </div>
+
+            </div>
+
+        `;
+
+    };
+
+
+    loadRecipeDetails();
 
 }

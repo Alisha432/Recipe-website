@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Recipe Details</title>
+
+    <link rel="stylesheet"
+        href="bootstrap/bootstrap.css">
+
+    <link rel="stylesheet"
+        href="style.css">
+
+</head>
+
+<body>
+
+
+<nav class="navbar navbar-expand-lg bg-light">
+
+    <div class="container">
+
+        <a class="navbar-brand"
+            href="dashboard.html">
+
+            RecipeShare
+
+        </a>
+
+
+        <button class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbar">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+
+        <div class="collapse navbar-collapse"
+            id="navbar">
+
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item">
+
+                    <a class="nav-link"
+                        href="dashboard.html">
+
+                        Dashboard
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a class="nav-link"
+                        href="all-recipes.html">
+
+                        All Recipes
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a class="nav-link"
+                        href="my-recipes.html">
+
+                        My Recipes
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a class="nav-link"
+                        href="recipe.html">
+
+                        Add Recipe
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <button
+                        class="btn btn-outline-dark"
+                        id="logoutBtn">
+
+                        Logout
+
+                    </button>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<div class="container py-5">
+
+    <div id="recipeDetails">
+
+    </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="bootstrap/bootstrap.js"></script>
+
+<script src="app.js"></script>
+
+</body>
+
+</html>
